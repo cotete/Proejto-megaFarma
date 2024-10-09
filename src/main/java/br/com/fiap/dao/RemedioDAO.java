@@ -34,4 +34,28 @@ public class RemedioDAO extends Repository{
 
 
     }
+
+    public RemedioTO findByCodigo (Long codigo){
+        RemedioTO remedio = new RemedioTO();
+        String sql = "SELECT * from ddd_remedios where codigo = ?";
+        try (PreparedStatement ps = getConnection().prepareStatement(sql)){
+            ps.setLong(1,codigo);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                remedio.setCodigo(rs.getLong("codigo"));
+                remedio.setNome(rs.getString("nome"));
+                remedio.setPreco(rs.getDouble("preco"));
+                remedio.setDataDeFabricacao(rs.getDate("dataDeFabricacao").toLocalDate());
+                remedio.setDataDeValidade(rs.getDate("dataDeValidade").toLocalDate());
+            }else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro na consulta: " + e.getMessage());
+        }finally {
+            closeConnection();
+        }
+        return remedio;
+    }
 }

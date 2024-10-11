@@ -18,4 +18,10 @@ public class RemedioBO {
         // aqui se implementa a regra de negócio
         return remedioDAO.findByCodigo(codigo);
     }
+
+    public RemedioTO save(RemedioTO remedio){
+        remedioDAO = new RemedioDAO();
+        //aq se aplica a regra de negócios
+        return remedioDAO.save(remedio);
+    }
 }

@@ -2,6 +2,7 @@ package br.com.fiap.resource;
 
 import br.com.fiap.bo.RemedioBO;
 import br.com.fiap.to.RemedioTO;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -43,7 +44,7 @@ public class RemedioResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response save(RemedioTO remedio){
+    public Response save(@Valid RemedioTO remedio){
         RemedioTO resultado = remedioBO.save(remedio);
         Response.ResponseBuilder response = null;
         if (resultado != null) {

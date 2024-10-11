@@ -3,6 +3,7 @@ package br.com.fiap.bo;
 import br.com.fiap.dao.RemedioDAO;
 import br.com.fiap.to.RemedioTO;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class RemedioBO {
@@ -21,7 +22,12 @@ public class RemedioBO {
 
     public RemedioTO save(RemedioTO remedio){
         remedioDAO = new RemedioDAO();
-        //aq se aplica a regra de negócios
+/*        if (!remedio.getDataDeFabricacao().isBefore(LocalDate.now())){
+            return null;
+        }
+        if (!remedio.getDataDeValidade().isAfter(LocalDate.now())){
+            return null;
+        }*/
         return remedioDAO.save(remedio);
     }
 }

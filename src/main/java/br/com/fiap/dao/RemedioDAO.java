@@ -77,4 +77,18 @@ public class RemedioDAO extends Repository{
         }
         return null;
     }
+
+    public boolean delete (Long codigo){
+        String sql = "delete from ddd_remedios where codigo = ?";
+
+        try (PreparedStatement ps = getConnection().prepareStatement(sql)){
+            ps.setLong(1, codigo);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Erro de sql: " + e.getMessage());
+        }finally {
+            closeConnection();
+        }
+        return false;
+    }
 }
